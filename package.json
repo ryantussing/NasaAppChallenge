@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Cdubles102403/NasaAppChallenge/issues"
   },
-  "homepage": "https://github.com/Cdubles102403/NasaAppChallenge#readme"
+  "homepage": "https://github.com/Cdubles102403/NasaAppChallenge#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
