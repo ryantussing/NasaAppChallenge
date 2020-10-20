@@ -1,0 +1,19 @@
+{
+  "name": "nasaappchallenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cdubles102403/NasaAppChallenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cdubles102403/NasaAppChallenge/issues"
+  },
+  "homepage": "https://github.com/Cdubles102403/NasaAppChallenge#readme"
+}
