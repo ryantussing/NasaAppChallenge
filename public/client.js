@@ -1,22 +1,25 @@
 var cols, rows;
 var scl = 20;
-var w = 800;
-var h = 800;
+var w;
+var h;
 
 var cam;
 
 var terrain = [];
 
 function setup() {
-createCanvas(w, h, WEBGL);
+w = windowWidth*.8;
+h = windowHeight*.8;
+var canvas=createCanvas(w, h, WEBGL);
+canvas.parent("Canvas")
 createEasyCam();
 
-cols = w / scl;
-rows = h / scl;
-
-for(var i=0;i<=cols;i++){
+cols = 50;
+rows = 55;
+console.log(cols+" "+rows)
+for(var i=0;i<=rows;i++){
   terrain[i]=[]
-  for(var y=0;y<rows;y++){
+  for(var y=0;y<cols;y++){
       terrain[i][y]=random(1,100)
     }
   }
