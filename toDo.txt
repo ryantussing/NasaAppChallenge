@@ -1,0 +1,15 @@
+=============TODO=====================
+format: *[task]-{name}{importance}
+*CSV File upload-cody 1
+*handle data on server and send back array -cody 2
+*take data array and display it in 3D
+*get azimuth angle
+*path finding
+*settings page
+*find 10 comm points with azimuth angles
+*2D overview for comms points
+======Maybe later/not important========
+*changeable theme/colors
+*multiuser- leader and watchers
+*multiplatform usable
+*
