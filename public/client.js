@@ -39,3 +39,11 @@ background(0);
     endShape();
   }
 }
+
+$(function(){
+  $("#submit").click(function(){
+      $.post("/upload",function(data,status){
+          console.log(data)        
+    })
+  })
+})
