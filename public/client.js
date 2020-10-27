@@ -2,6 +2,8 @@ var cols, rows;
 var scl = 20;
 var w;
 var h;
+var xOff = 0;
+var yOff = 0;
 
 var cam;
 
@@ -29,7 +31,7 @@ function draw() {
 background(0);
 
   fill(255);
-  translate(-w / 2, -h / 2);
+  translate(-w / 2 + xOff, -h / 2 + yOff);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
     for (var x = 0; x < cols; x++) {
@@ -38,4 +40,10 @@ background(0);
     }
     endShape();
   }
+}
+
+function mouseDragged(event) {
+  xOff += movedX;
+  yOff += movedY;
+  console.log(xOff + " - " + yOff);
 }
