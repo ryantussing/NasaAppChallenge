@@ -42,8 +42,15 @@ background(0);
 
 $(function(){
   $("#submit").click(function(){
-      $.post("/upload",function(data,status){
-          console.log(data)        
-    })
+    var file = $("#fileUpload")[0].files[0];
+    console.log(file)
+    var obj = {"File":file}
+    $.ajax({
+      type: "POST",
+      url: 'upload',
+      data: file,
+      processData: false,
+      contentType: false,
+  })
   })
 })
