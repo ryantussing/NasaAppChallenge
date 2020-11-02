@@ -43,14 +43,16 @@ background(0);
 }
 
 $(function(){
-  $("#submit").click(function(){
+  formData = new FormData();
+  $("#sendFile").click(function(){
     var file = $("#fileUpload")[0].files[0];
+    formData.append("file", file);
     console.log(file)
     var obj = {"File":file}
     $.ajax({
       type: "POST",
       url: 'upload',
-      data: file,
+      body: formData,
       processData: false,
       contentType: false,
   })
