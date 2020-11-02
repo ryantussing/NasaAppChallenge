@@ -4,6 +4,10 @@ body{
     text-align: center;
 }
 
+input {
+    margin-right: -48px;
+}
+
 nav a {
     color: #0ff;
     margin: 10px;
