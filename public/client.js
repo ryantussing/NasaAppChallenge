@@ -11,6 +11,14 @@ var cam;
 var terrain = [];
 
 function setup() {
+  document.addEventListener("contextmenu",
+    function(event) {
+      if (event.target.nodeName === "CANVAS") {
+        event.preventDefault();
+      }
+    }
+  ,false);
+
   w = windowWidth*.8;
   h = windowHeight*.8;
   var canvas=createCanvas(w, h, WEBGL);
@@ -22,34 +30,45 @@ function setup() {
   cam.setPosition(camX, camY, camZ);
   cam.lookAt(0, 0, 0);
 
-  cols = 50;
-  rows = 55;
-  console.log(cols+" "+rows)
-  for(var i=0;i<=rows;i++){
-    terrain[i]=[]
+  cols = 96;
+  rows = 64;
+  for(var x=0;x<=rows;x++){
+    terrain[x]=[];
     for(var y=0;y<cols;y++){
-      terrain[i][y]=random(1,100)
+      terrain[x][y]=noise(x * .4, y * .4);
     }
   }
 }
 
 function draw() {
-  background(0);
+  background(24);
 
-  fill(255);
+  fill(0, 204, 204);
   rotateZ(theta);
-  translate(-w / 2, -h / 2);
+  translate(-cols*scl / 2, -rows*scl / 2);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
     for (var x = 0; x < cols; x++) {
-      vertex(x * scl, y * scl,terrain[y][x]);
-      vertex(x * scl, (y + 1) * scl,terrain[y+1][x]);
+      vertex(x * scl, y * scl,terrain[y][x] * 120);
+      vertex(x * scl, (y + 1) * scl,terrain[y+1][x] * 120);
+    }
+    endShape();
+  }
+  for (var y = 0; y < rows - 1; y++) {
+    beginShape(TRIANGLE_STRIP);
+    for (var x = 0; x < cols; x++) {
+      vertex(x * scl, y * scl, 0);
+      vertex(x * scl, (y + 1) * scl, 0);
     }
     endShape();
   }
 
-  translate(-w / 2, -h / 2 - 400);
+  translate(cols*scl / 2, -200);
   fill(255, 0, 0);
+  sphere(50);
+
+  translate(cols*scl / 2 + 200, rows*scl / 2 + 200);
+  fill(0, 0, 255);
   sphere(50);
 
   cam.setPosition(camX, camY, camZ);
@@ -72,9 +91,10 @@ $(function(){
 })
 
 function mouseDragged(event) {
-  camX -= movedX;
-  camY -= movedY;
-  console.log(xOff + " - " + yOff);
+  if (event.buttons === 1) {
+    camX -= movedX;
+    camY -= movedY;
+  }
 }
 
 function keyPressed(event) {
