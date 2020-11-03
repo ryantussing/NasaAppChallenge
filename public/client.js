@@ -1,10 +1,7 @@
 var cols, rows;
 var w, h;
-var camX, camY, camZ;
+var camX, camY, camZ, camRoX, camRoY, camRoZ;
 var scl = 20;
-var xOff = 0;
-var yOff = 0;
-var theta = 0;
 
 var cam;
 
@@ -17,38 +14,42 @@ function setup() {
         event.preventDefault();
       }
     }
-  ,false);
+  , false);
 
-  w = windowWidth*.8;
-  h = windowHeight*.8;
-  var canvas=createCanvas(w, h, WEBGL);
+  w = windowWidth * .8;
+  h = windowHeight * .8;
+  var canvas = createCanvas(w, h, WEBGL);
   canvas.parent("Canvas");
+
   cam = createCamera();
   camX = 0;
   camY = 0;
   camZ = 750;
+  camRoX = 0;
+  camRoY = 0;
+  camRoZ = 0;
   cam.setPosition(camX, camY, camZ);
   cam.lookAt(0, 0, 0);
 
   cols = 96;
   rows = 64;
-  for(var x=0;x<=rows;x++){
-    terrain[x]=[];
-    for(var y=0;y<cols;y++){
-      terrain[x][y]=noise(x * .4, y * .4);
+  for(var x = 0; x <= rows; x++){
+    terrain[x] = [];
+    for(var y = 0; y < cols; y++){
+      terrain[x][y] = noise(x * .4, y * .4);
     }
   }
 }
 
 function draw() {
   background(24);
-
   fill(0, 204, 204);
-  rotateZ(theta);
-  translate(-cols*scl / 2, -rows*scl / 2);
+  rotateZ(camRoZ);
+  translate((-cols * scl) / 2, (-rows * scl) / 2);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
     for (var x = 0; x < cols; x++) {
+      fill(0, 105 + terrain[y][x] * 150, 105 + terrain[y][x] * 150);
       vertex(x * scl, y * scl,terrain[y][x] * 120);
       vertex(x * scl, (y + 1) * scl,terrain[y+1][x] * 120);
     }
@@ -63,15 +64,19 @@ function draw() {
     endShape();
   }
 
-  translate(cols*scl / 2, -200);
+  translate((cols * scl) / 2, -200);
   fill(255, 0, 0);
-  sphere(50);
+  sphere(20);
 
-  translate(cols*scl / 2 + 200, rows*scl / 2 + 200);
+  translate((cols * scl) / 2 + 200, (rows * scl) / 2 + 200);
   fill(0, 0, 255);
-  sphere(50);
+  sphere(20);
 
   cam.setPosition(camX, camY, camZ);
+  cam.pan(camRoX);
+  camRoX /= 2;
+  cam.tilt(camRoY);
+  camRoY /= 2;
   setCamera(cam);
 }
 
@@ -95,14 +100,21 @@ function mouseDragged(event) {
     camX -= movedX;
     camY -= movedY;
   }
+  if (event.buttons === 2) {
+    camRoX = -movedX / 2.5 * Math.PI/360;
+    camRoY = movedY / 2.5 * Math.PI/360;
+  }
 }
 
 function keyPressed(event) {
   if (keyCode === 81) {
-    theta -= Math.PI / 2;
+    camRoZ -= Math.PI / 2;
   }
   if (keyCode === 69) {
-    theta += Math.PI / 2;
+    camRoZ += Math.PI / 2;
+  }
+  if (keyCode === 32) {
+    cam.lookAt(0, 0, 0);
   }
 }
 
