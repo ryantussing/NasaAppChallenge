@@ -21,3 +21,7 @@ nav a:hover {
     margin-top: 32px;
     margin-bottom: 32px;
 }
+
+#sendFile {
+    margin:-30px;
+}
