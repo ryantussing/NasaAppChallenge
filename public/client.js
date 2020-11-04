@@ -42,23 +42,6 @@ background(0);
   }
 }
 
-$(function(){
-  formData = new FormData();
-  $("#sendFile").click(function(){
-    var file = $("#fileUpload")[0].files[0];
-    formData.append("file", file);
-    console.log(file)
-    var obj = {"File":file}
-    $.ajax({
-      type: "POST",
-      url: 'upload',
-      body: formData,
-      processData: false,
-      contentType: false,
-  })
-  })
-})
-
 function mouseDragged(event) {
   xOff += movedX;
   yOff += movedY;

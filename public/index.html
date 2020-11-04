@@ -17,8 +17,11 @@
   </header>
   <div id="Canvas"></div>
     <div id="controls">
-            <input id="fileUpload" type="file" name="file" />
-            <button id="sendFile" type="submit">submit</button>
+<form action="/uploadfile" enctype="multipart/form-data" method="POST"> 
+    <input type="file" name="myFile" />
+    <input type="submit" value="Upload a file"/>
+ </form>
+  
     </div>
 </body>
 </html>
