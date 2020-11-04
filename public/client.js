@@ -47,3 +47,6 @@ function mouseDragged(event) {
   yOff += movedY;
   console.log(xOff + " - " + yOff);
 }
+
+var grid = new PF.Grid(5, 3);
+console.log(grid)
