@@ -23,5 +23,11 @@ nav a:hover {
 }
 
 #sendFile {
-    margin:-30px;
+    margin-left: center;
 }
+
+#uploadFile {
+    margin-right: -175px;
+}
+
+
