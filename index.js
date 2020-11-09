@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const parser = require('body-parser')
 const multer = require('multer')
+const {spawn} = require('child_process')
 //setup for multer data
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -26,6 +27,11 @@ app.listen(port, () => {
 //post request path for uploading file to server
 app.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
   const file = req.file
+  var data = spawn('python',['converter.py',file.filename])
+  data.stdout.on('data',function(data){
+    console.log('python output')
+    console.log(data.toString())
+  })
   if (!file) {
     res.send("please upload a file")
     return false;
