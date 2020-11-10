@@ -43,10 +43,7 @@ function setup() {
 
 function draw() {
   background(24);
-  let dirX = (mouseX / width - 0.5) * 2;
-  let dirY = (mouseY / height - 0.5) * 2;
-  directionalLight(250, 250, 250, -dirX, -dirY, -1);
-  fill(0, 204, 204);
+  
   rotateZ(camRoZ);
   translate((-cols * scl) / 2, (-rows * scl) / 2);
   for (var y = 0; y < rows - 1; y++) {
