@@ -1,5 +1,6 @@
 #uploads files
 uploads/*
+*.csv
 
 # Logs
 logs
