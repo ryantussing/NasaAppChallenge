@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="pathfinding-browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/freshfork/p5.EasyCam@1.0.10/p5.easycam.min.js" charset="utf-8"></script>
     <script src="client.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -19,8 +20,11 @@
     </header>
   <div id="Canvas"></div>
     <div id="controls">
-        <input type="file" name="" value="">
-        <button type="button" id="sendFile" name="button">send file</button>
+<form action="/uploadfile" enctype="multipart/form-data" method="POST"> 
+    <input type="file" name="myFile" />
+    <input type="submit" value="Upload a file"/>
+ </form>
+  
     </div>
 </body>
 </html>

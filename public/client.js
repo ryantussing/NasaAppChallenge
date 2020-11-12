@@ -1,3 +1,4 @@
+
 var cols, rows;
 var canvW, canvH;
 var camX, camY, camZ, camDX, camDY;
@@ -8,6 +9,7 @@ var cam;
 var terrain = [];
 
 function setup() {
+
   document.addEventListener("contextmenu",
     function(event) {
       if (event.target.nodeName === "CANVAS") {
@@ -41,19 +43,6 @@ function setup() {
 }
 
 function draw() {
-  if (keyIsDown(87)) {
-    camDY = -25;
-  }
-  if (keyIsDown(83)) {
-    camDY = 25;
-  }
-  if (keyIsDown(65)) {
-    camDX = -25;
-  }
-  if (keyIsDown(68)) {
-    camDX = 25;
-  }
-
   background(24);
   fill(0, 204, 204);
   translate((-cols * scl) / 2, (-rows * scl) / 2);
@@ -87,10 +76,11 @@ function draw() {
   setCamera(cam);
 }
 
-$(function(){
-  $("#submit").click(function(){
+$(function() {
+  $("#sendFile").click(function() {
     var file = $("#fileUpload")[0].files[0];
     console.log(file)
+    
     var obj = {"File":file}
     $.ajax({
       type: "POST",

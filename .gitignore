@@ -1,3 +1,9 @@
+#uploads files
+uploads/*
+*.csv
+*.vscode
+
+
 # Logs
 logs
 *.log
