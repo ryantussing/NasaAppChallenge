@@ -29,7 +29,10 @@ app.get("/path",function(req,res) {
     }
   }
 var grid = new PF.Grid(terrain);
-var finder = new PF.AStarFinder();
+var finder = new PF.AStarFinder({
+    allowDiagonal: true,
+    dontCrossCorners: true
+});
 var path = finder.findPath(10, 10, 50, 50, grid);
 console.log(path)
 res.send(path)
