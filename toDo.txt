@@ -1,7 +1,7 @@
 =============TODO=====================
 format: *[task]-{name}{importance}
-*CSV File upload-cody 1
-*handle data on server and send back array -cody 2
+*CSV File upload
+*handle data on server and send back array
 *take data array and display it in 3D
 *get azimuth angle
 *path finding
@@ -12,4 +12,3 @@ format: *[task]-{name}{importance}
 *changeable theme/colors
 *multiuser- leader and watchers
 *multiplatform usable
-*

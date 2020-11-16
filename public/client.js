@@ -1,6 +1,7 @@
+
 var cols, rows;
-var w, h;
-var camX, camY, camZ, camRoX, camRoY, camRoZ;
+var canvW, canvH;
+var camX, camY, camZ, camDX, camDY;
 var scl = 20;
 
 var cam;
@@ -8,6 +9,7 @@ var cam;
 var terrain = [];
 
 function setup() {
+
   document.addEventListener("contextmenu",
     function(event) {
       if (event.target.nodeName === "CANVAS") {
@@ -16,18 +18,17 @@ function setup() {
     }
   , false);
 
-  w = windowWidth * .8;
-  h = windowHeight * .8;
-  var canvas = createCanvas(w, h, WEBGL);
+  canvW = windowWidth * .8;
+  canvH = windowHeight * .8;
+  var canvas = createCanvas(canvW, canvH, WEBGL);
   canvas.parent("Canvas");
 
   cam = createCamera();
   camX = 0;
   camY = 0;
   camZ = 750;
-  camRoX = 0;
-  camRoY = 0;
-  camRoZ = 0;
+  camDX = 0;
+  camDY = 0;
   cam.setPosition(camX, camY, camZ);
   cam.lookAt(0, 0, 0);
 
@@ -43,12 +44,7 @@ function setup() {
 
 function draw() {
   background(24);
-  
-    let text = 'random text'
-    console.log(typeof text);
-    
-  
-  rotateZ(camRoZ);
+  fill(0, 204, 204);
   translate((-cols * scl) / 2, (-rows * scl) / 2);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
@@ -59,14 +55,7 @@ function draw() {
     }
     endShape();
   }
-  for (var y = 0; y < rows - 1; y++) {
-    beginShape(TRIANGLE_STRIP);
-    for (var x = 0; x < cols; x++) {
-      vertex(x * scl, y * scl, 0);
-      vertex(x * scl, (y + 1) * scl, 0);
-    }
-    endShape();
-  }
+  rect(0, 0, cols * scl, rows * scl);
 
   translate((cols * scl) / 2, -200);
   fill(255, 0, 0);
@@ -76,18 +65,22 @@ function draw() {
   fill(0, 0, 255);
   sphere(20);
 
+  camX += camDX;
+  camY += camDY;
+
   cam.setPosition(camX, camY, camZ);
-  cam.pan(camRoX);
-  camRoX /= 2;
-  cam.tilt(camRoY);
-  camRoY /= 2;
+
+  camDX /= 4;
+  camDY /= 4;
+
   setCamera(cam);
 }
 
-$(function(){
-  $("#submit").click(function(){
+$(function() {
+  $("#sendFile").click(function() {
     var file = $("#fileUpload")[0].files[0];
     console.log(file)
+    
     var obj = {"File":file}
     $.ajax({
       type: "POST",
@@ -101,22 +94,12 @@ $(function(){
 
 function mouseDragged(event) {
   if (event.buttons === 1) {
-    camX -= movedX;
-    camY -= movedY;
-  }
-  if (event.buttons === 2) {
-    camRoX = -movedX / 2.5 * Math.PI/360;
-    camRoY = movedY / 2.5 * Math.PI/360;
+    camDX -= movedX;
+    camDY -= movedY;
   }
 }
 
 function keyPressed(event) {
-  if (keyCode === 81) {
-    camRoZ -= Math.PI / 2;
-  }
-  if (keyCode === 69) {
-    camRoZ += Math.PI / 2;
-  }
   if (keyCode === 32) {
     cam.lookAt(0, 0, 0);
   }
