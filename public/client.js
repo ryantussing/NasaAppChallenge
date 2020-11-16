@@ -44,6 +44,10 @@ function setup() {
 function draw() {
   background(24);
   
+    let text = 'random text'
+    console.log(typeof text);
+    
+  
   rotateZ(camRoZ);
   translate((-cols * scl) / 2, (-rows * scl) / 2);
   for (var y = 0; y < rows - 1; y++) {
